@@ -1,0 +1,6 @@
+root@NR7101:/usr/sbin# iptables -vL -t raw
+Chain PREROUTING (policy ACCEPT 19577 packets, 3835K bytes)
+ pkts bytes target     prot opt in     out     source               destination         
+
+Chain OUTPUT (policy ACCEPT 5757 packets, 5223K bytes)
+ pkts bytes target     prot opt in     out     source               destination  

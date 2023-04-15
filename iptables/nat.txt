@@ -1,0 +1,179 @@
+root@NR7101:/usr/sbin# iptables -vL -t nat
+Chain PREROUTING (policy ACCEPT 1190 packets, 93375 bytes)
+ pkts bytes target     prot opt in     out     source               destination         
+ 1880  158K PR_IPPASS_CWMP1  all  --  any    any     anywhere             anywhere            
+ 1880  158K PR_IPPASS_REMOMGMT1  all  --  any    any     anywhere             anywhere            
+ 1880  158K PR_IPPASS_GENERAL1  all  --  any    any     anywhere             anywhere            
+ 1559  144K V4_PORT_REDIRECT  all  --  any    any     anywhere             anywhere            
+   10   484 ACCEPT     all  --  any    any     anywhere             224.0.0.0/4         
+ 1550  144K WEB_REDIRECT  all  --  any    any     anywhere             anywhere            
+ 1550  144K PCP_WEB_REDIRECT  all  --  any    any     anywhere             anywhere            
+ 1550  144K PR_SP_DOMAIN  all  --  any    any     anywhere             anywhere            
+ 1550  144K PR_SRV     all  --  any    any     anywhere             anywhere            
+ 1550  144K PR_REMOMGMT  all  --  any    any     anywhere             anywhere            
+ 1335  121K PR_SRV_DHCP  all  --  any    any     anywhere             anywhere            
+ 1335  121K PR_CWMP    all  --  any    any     anywhere             anywhere            
+ 1335  121K PR_GENERAL  all  --  any    any     anywhere             anywhere            
+ 1335  121K PR_DNS_REDIRECT  all  --  any    any     anywhere             anywhere            
+ 1335  121K NAT_PR_ADDR_MAPPING  all  --  any    any     anywhere             anywhere            
+ 1335  121K NAT_PORT_MAPPING  all  --  any    any     anywhere             anywhere            
+ 1335  121K NAT_PORT_TRIGGER  all  --  any    any     anywhere             anywhere            
+ 1335  121K NAT_PORT_MAPPING_UPNP  all  --  any    any     anywhere             anywhere            
+ 1335  121K PR_DMZ     all  --  any    any     anywhere             anywhere            
+
+Chain INPUT (policy ACCEPT 22 packets, 3390 bytes)
+ pkts bytes target     prot opt in     out     source               destination         
+
+Chain OUTPUT (policy ACCEPT 18 packets, 1378 bytes)
+ pkts bytes target     prot opt in     out     source               destination         
+
+Chain POSTROUTING (policy ACCEPT 1646 packets, 117K bytes)
+ pkts bytes target     prot opt in     out     source               destination         
+ 1662  119K NAT_PO_IPPASS1  all  --  any    any     anywhere             anywhere            
+    0     0 ACCEPT     all  --  any    any     anywhere             224.0.0.0/4         
+ 1713  121K NAT_PO_ADDR_MAPPING  all  --  any    any     anywhere             anywhere            
+ 1713  121K NAT_PO_PORT_MAPPING  all  --  any    any     anywhere             anywhere            
+ 1713  121K NAT_PO_WAN  all  --  any    any     anywhere             anywhere            
+ 1713  121K NAT_PO_DMZ  all  --  any    any     anywhere             anywhere            
+
+Chain NAT_LOOPBACK (1 references)
+ pkts bytes target     prot opt in     out     source               destination         
+
+Chain NAT_PORT_MAPPING (1 references)
+ pkts bytes target     prot opt in     out     source               destination         
+
+Chain NAT_PORT_MAPPING_UPNP (1 references)
+ pkts bytes target     prot opt in     out     source               destination         
+ 1335  121K NAT_PORT_MAPPING_UPNP_1  all  --  any    any     anywhere             anywhere            
+ 1335  121K NAT_PORT_MAPPING_UPNP_2  all  --  any    any     anywhere             anywhere            
+ 1335  121K NAT_PORT_MAPPING_UPNP_3  all  --  any    any     anywhere             anywhere            
+ 1335  121K NAT_PORT_MAPPING_UPNP_4  all  --  any    any     anywhere             anywhere            
+
+Chain NAT_PORT_MAPPING_UPNP_1 (1 references)
+ pkts bytes target     prot opt in     out     source               destination         
+
+Chain NAT_PORT_MAPPING_UPNP_2 (1 references)
+ pkts bytes target     prot opt in     out     source               destination         
+
+Chain NAT_PORT_MAPPING_UPNP_3 (1 references)
+ pkts bytes target     prot opt in     out     source               destination         
+
+Chain NAT_PORT_MAPPING_UPNP_4 (1 references)
+ pkts bytes target     prot opt in     out     source               destination         
+
+Chain NAT_PORT_TRIGGER (1 references)
+ pkts bytes target     prot opt in     out     source               destination         
+
+Chain NAT_PO_ADDR_MAPPING (1 references)
+ pkts bytes target     prot opt in     out     source               destination         
+
+Chain NAT_PO_DMZ (1 references)
+ pkts bytes target     prot opt in     out     source               destination         
+
+Chain NAT_PO_IPPASS1 (1 references)
+ pkts bytes target     prot opt in     out     source               destination         
+    8   536 SNAT       all  --  any    wwan0   37.83.118.29         anywhere             to:37.83.118.30
+    0     0 SNAT       all  --  any    wwan0   192.168.1.1          anywhere             to:37.83.118.30
+
+Chain NAT_PO_PORT_MAPPING (1 references)
+ pkts bytes target     prot opt in     out     source               destination         
+
+Chain NAT_PO_WAN (1 references)
+ pkts bytes target     prot opt in     out     source               destination         
+
+Chain NAT_PR_ADDR_MAPPING (1 references)
+ pkts bytes target     prot opt in     out     source               destination         
+
+Chain PCP_WEB_REDIRECT (1 references)
+ pkts bytes target     prot opt in     out     source               destination         
+
+Chain PR_CWMP (1 references)
+ pkts bytes target     prot opt in     out     source               destination         
+    0     0 ACCEPT     tcp  --  wwan0  any     anywhere             anywhere             tcp dpt:7547 flags:FIN,SYN,RST,ACK/SYN tcp flags:FIN,SYN,RST,ACK/SYN limit: avg 1/sec burst 2
+    0     0 ACCEPT     udp  --  wwan0  any     anywhere             anywhere             udp dpt:7678
+
+Chain PR_DMZ (1 references)
+ pkts bytes target     prot opt in     out     source               destination         
+
+Chain PR_DNS_REDIRECT (1 references)
+ pkts bytes target     prot opt in     out     source               destination         
+
+Chain PR_GENERAL (1 references)
+ pkts bytes target     prot opt in     out     source               destination         
+    0     0 ACCEPT     all  --  any    any     anywhere             anywhere             state RELATED,ESTABLISHED
+
+Chain PR_IPPASS_CWMP1 (1 references)
+ pkts bytes target     prot opt in     out     source               destination         
+    0     0 DNAT       tcp  --  wwan0  any     anywhere             37.83.118.30         tcp dpt:7547 to:37.83.118.29:7547
+    0     0 DNAT       udp  --  wwan0  any     anywhere             37.83.118.30         udp dpt:7678 to:37.83.118.29:7678
+
+Chain PR_IPPASS_GENERAL (0 references)
+ pkts bytes target     prot opt in     out     source               destination         
+
+Chain PR_IPPASS_GENERAL1 (1 references)
+ pkts bytes target     prot opt in     out     source               destination         
+  321 14217 ACCEPT     all  --  wwan0  any     anywhere             anywhere            
+
+Chain PR_IPPASS_REMOMGMT (0 references)
+ pkts bytes target     prot opt in     out     source               destination         
+
+Chain PR_IPPASS_REMOMGMT1 (1 references)
+ pkts bytes target     prot opt in     out     source               destination         
+ 1880  158K TRUST_DOMAIN_IPPASS1  all  --  any    any     anywhere             anywhere            
+    0     0 PR_SERVICE_PT_HTTPS1  tcp  --  wwan0  any     anywhere             anywhere             tcp dpt:20443
+
+Chain PR_REMOMGMT (1 references)
+ pkts bytes target     prot opt in     out     source               destination         
+ 1343  106K TRUST_DOMAIN  all  --  any    any     anywhere             anywhere            
+ 1343  106K NAT_LOOPBACK  all  --  any    any     anywhere             anywhere            
+   27  2503 ACCEPT     tcp  --  br+    any     anywhere             anywhere             tcp dpt:www
+  119  8708 ACCEPT     tcp  --  br+    any     anywhere             anywhere             tcp dpt:https
+    1    60 ACCEPT     tcp  --  br+    any     anywhere             anywhere             tcp dpt:ssh
+    0     0 ACCEPT     icmp --  br+    any     anywhere             anywhere            
+
+Chain PR_SERVICE_PT_FTP1 (0 references)
+ pkts bytes target     prot opt in     out     source               destination         
+    0     0 DNAT       tcp  --  any    any     anywhere             37.83.118.30         to:37.83.118.29:21
+
+Chain PR_SERVICE_PT_HTTP1 (0 references)
+ pkts bytes target     prot opt in     out     source               destination         
+    0     0 DNAT       tcp  --  any    any     anywhere             37.83.118.30         to:37.83.118.29:80
+
+Chain PR_SERVICE_PT_HTTPS1 (1 references)
+ pkts bytes target     prot opt in     out     source               destination         
+    0     0 DNAT       tcp  --  any    any     anywhere             37.83.118.30         to:37.83.118.29:443
+
+Chain PR_SERVICE_PT_SNMP1 (0 references)
+ pkts bytes target     prot opt in     out     source               destination         
+
+Chain PR_SERVICE_PT_SSH1 (0 references)
+ pkts bytes target     prot opt in     out     source               destination         
+    0     0 DNAT       tcp  --  any    any     anywhere             37.83.118.30         to:37.83.118.29:22
+
+Chain PR_SERVICE_PT_TELNET1 (0 references)
+ pkts bytes target     prot opt in     out     source               destination         
+    0     0 DNAT       tcp  --  any    any     anywhere             37.83.118.30         to:37.83.118.29:23
+
+Chain PR_SP_DOMAIN (1 references)
+ pkts bytes target     prot opt in     out     source               destination         
+
+Chain PR_SRV (1 references)
+ pkts bytes target     prot opt in     out     source               destination         
+
+Chain PR_SRV_DHCP (1 references)
+ pkts bytes target     prot opt in     out     source               destination         
+
+Chain SP_TRUST_DOMAIN (0 references)
+ pkts bytes target     prot opt in     out     source               destination         
+
+Chain TRUST_DOMAIN (1 references)
+ pkts bytes target     prot opt in     out     source               destination         
+
+Chain TRUST_DOMAIN_IPPASS1 (1 references)
+ pkts bytes target     prot opt in     out     source               destination         
+
+Chain V4_PORT_REDIRECT (1 references)
+ pkts bytes target     prot opt in     out     source               destination         
+
+Chain WEB_REDIRECT (1 references)
+ pkts bytes target     prot opt in     out     source               destination  

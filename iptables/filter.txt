@@ -1,0 +1,271 @@
+root@NR7101:/usr/sbin# iptables -vL 
+Chain INPUT (policy ACCEPT 0 packets, 0 bytes)
+ pkts bytes target     prot opt in     out     source               destination         
+ 3592  284K PR_IPPASS_CWMP1  all  --  any    any     anywhere             anywhere            
+ 3592  284K PR_IPPASS_REMOMGMT1  all  --  any    any     anywhere             anywhere            
+ 3592  284K PR_IPPASS_GENERAL1  all  --  any    any     anywhere             anywhere            
+   41  3125 INPUT_IPPASS1  all  --  any    any     anywhere             anywhere            
+   41  3125 V4_PORT_REDIRECT  all  --  any    any     anywhere             anywhere            
+  126  8014 ACCEPT     all  --  lo     any     anywhere             anywhere            
+   36  3109 INPUT_TEST  all  --  any    any     anywhere             anywhere            
+    0     0 INPUT_GUESTAP  all  --  br+    any     anywhere             anywhere             mark match 0x8/0x8
+   36  3109 INPUT_DOS  all  --  any    any     anywhere             anywhere            
+   36  3109 INPUT_SRV  all  --  any    any     anywhere             anywhere            
+   34  2461 INPUT_SP_DOMAIN  all  --  any    any     anywhere             anywhere            
+   34  2461 INPUT_CWMP  all  --  any    any     anywhere             anywhere            
+   34  2461 INPUT_REMOMGMT  all  --  any    any     anywhere             anywhere            
+   20  1621 INPUT_CF   all  --  any    any     anywhere             anywhere            
+   20  1621 INPUT_GENERAL  all  --  any    any     anywhere             anywhere            
+   19  1557 INPUT_RIP  all  --  any    any     anywhere             anywhere            
+    0     0 DROP       all  --  !br+   any     anywhere             anywhere            
+
+Chain FORWARD (policy ACCEPT 0 packets, 0 bytes)
+ pkts bytes target     prot opt in     out     source               destination         
+14063 3387K FORWARD_IPPASS1  all  --  any    any     anywhere             anywhere            
+    3   228 FORWARD_DMZ  all  --  any    any     anywhere             anywhere            
+    0     0 FORWARD_GUESTAP  all  --  br+    any     anywhere             anywhere             mark match 0x8/0x8
+    1   140 FORWARD_PARENTAL  all  --  br+    any     anywhere             anywhere            
+    3   228 FORWARD_INTBLCK  all  --  any    any     anywhere             anywhere            
+    3   228 FORWARD_CF  all  --  any    any     anywhere             anywhere            
+    3   228 FORWARD_GENERAL  all  --  any    any     anywhere             anywhere            
+    3   228 FORWARD_DOS  all  --  any    any     anywhere             anywhere            
+    3   228 FORWARD_SRV  all  --  any    any     anywhere             anywhere            
+    3   228 FORWARD_NAT  all  --  any    any     anywhere             anywhere            
+    3   228 FORWARD_PM_UPNP  all  --  any    any     anywhere             anywhere            
+    3   228 FORWARD_POLICY  all  --  any    any     anywhere             anywhere            
+
+Chain OUTPUT (policy ACCEPT 3474 packets, 4917K bytes)
+ pkts bytes target     prot opt in     out     source               destination         
+ 3643 4929K OUTPUT_GENERAL  all  --  any    any     anywhere             anywhere            
+ 3620 4927K OUTPUT_SRV  all  --  any    any     anywhere             anywhere            
+
+Chain BAD_PING (0 references)
+ pkts bytes target     prot opt in     out     source               destination         
+
+Chain FORWARD_CF (1 references)
+ pkts bytes target     prot opt in     out     source               destination         
+
+Chain FORWARD_DMZ (1 references)
+ pkts bytes target     prot opt in     out     source               destination         
+
+Chain FORWARD_DOS (1 references)
+ pkts bytes target     prot opt in     out     source               destination         
+
+Chain FORWARD_GENERAL (1 references)
+ pkts bytes target     prot opt in     out     source               destination         
+    0     0 ACCEPT     all  --  any    any     anywhere             anywhere             state RELATED,ESTABLISHED
+
+Chain FORWARD_GUESTAP (1 references)
+ pkts bytes target     prot opt in     out     source               destination         
+    0     0 DROP       all  --  br+    wwan+   anywhere             anywhere            
+
+Chain FORWARD_INTBLCK (1 references)
+ pkts bytes target     prot opt in     out     source               destination         
+
+Chain FORWARD_IPPASS (0 references)
+ pkts bytes target     prot opt in     out     source               destination         
+
+Chain FORWARD_IPPASS1 (1 references)
+ pkts bytes target     prot opt in     out     source               destination         
+14060 3387K ACCEPT     all  --  any    any     anywhere             anywhere            
+
+Chain FORWARD_NAT (1 references)
+ pkts bytes target     prot opt in     out     source               destination         
+    3   228 FORWARD_PM  all  --  any    any     anywhere             anywhere            
+    3   228 FORWARD_SESS_LIMIT  all  --  any    any     anywhere             anywhere            
+    3   228 FORWARD_PT  all  --  any    any     anywhere             anywhere            
+
+Chain FORWARD_PARENTAL (1 references)
+ pkts bytes target     prot opt in     out     source               destination         
+
+Chain FORWARD_PM (1 references)
+ pkts bytes target     prot opt in     out     source               destination         
+
+Chain FORWARD_PM_UPNP (1 references)
+ pkts bytes target     prot opt in     out     source               destination         
+
+Chain FORWARD_POLICY (1 references)
+ pkts bytes target     prot opt in     out     source               destination         
+    3   228 LevelLow   all  --  any    any     anywhere             anywhere            
+
+Chain FORWARD_PT (1 references)
+ pkts bytes target     prot opt in     out     source               destination         
+
+Chain FORWARD_SESS_LIMIT (1 references)
+ pkts bytes target     prot opt in     out     source               destination         
+
+Chain FORWARD_SRV (1 references)
+ pkts bytes target     prot opt in     out     source               destination         
+    0     0 ACCEPT     tcp  --  br+    any     anywhere             anywhere             multiport dports telnet,ftp,ftp-data,www,https,smtp,domain,pop3,pop3s,imap3,imap2,imaps
+    0     0 ACCEPT     udp  --  br+    any     anywhere             anywhere             multiport dports 80,https,domain,pop3,pop3s,imap3,imap2,imaps
+    0     0 ACCEPT     udp  --  br+    any     anywhere             anywhere             udp dpt:ntp
+    0     0 ACCEPT     udp  --  br+    any     anywhere             anywhere             udp spts:bootps:bootpc dpts:bootps:bootpc
+
+Chain ICMP_REDIRECT (0 references)
+ pkts bytes target     prot opt in     out     source               destination         
+
+Chain INPUT_CF (1 references)
+ pkts bytes target     prot opt in     out     source               destination         
+
+Chain INPUT_CWMP (2 references)
+ pkts bytes target     prot opt in     out     source               destination         
+    0     0 ACCEPT     tcp  --  wwan0  any     anywhere             anywhere             tcp dpt:7547 flags:FIN,SYN,RST,ACK/SYN tcp flags:FIN,SYN,RST,ACK/SYN limit: avg 1/sec burst 2
+    0     0 ACCEPT     udp  --  wwan0  any     anywhere             anywhere             udp dpt:7678
+
+Chain INPUT_DOS (1 references)
+ pkts bytes target     prot opt in     out     source               destination         
+
+Chain INPUT_GENERAL (1 references)
+ pkts bytes target     prot opt in     out     source               destination         
+    0     0 DROP       tcp  --  !br+   any     anywhere             anywhere             tcp dpt:domain
+    0     0 DROP       udp  --  !br+   any     anywhere             anywhere             udp dpt:domain
+    0     0 ACCEPT     udp  --  lo     any     anywhere             anywhere             udp dpt:domain
+    0     0 DROP       tcp  --  !br+   any     anywhere             anywhere             tcp dpt:1900
+    0     0 DROP       udp  --  !br+   any     anywhere             anywhere             udp dpt:1900
+    0     0 DROP       icmp --  !br+   any     anywhere             anywhere             icmp timestamp-request
+    1    64 ACCEPT     all  --  any    any     anywhere             anywhere             state RELATED,ESTABLISHED
+    0     0 ACCEPT     all  --  lo     any     anywhere             anywhere            
+    0     0 DROP       all  --  !lo    any     127.0.0.0/8          anywhere            
+
+Chain INPUT_GUESTAP (1 references)
+ pkts bytes target     prot opt in     out     source               destination         
+
+Chain INPUT_IPPASS (0 references)
+ pkts bytes target     prot opt in     out     source               destination         
+
+Chain INPUT_IPPASS1 (1 references)
+ pkts bytes target     prot opt in     out     source               destination         
+    0     0 RETURN     all  --  eth+   any     anywhere             anywhere            
+
+Chain INPUT_REMOMGMT (1 references)
+ pkts bytes target     prot opt in     out     source               destination         
+   14   840 TRUST_DOMAIN  all  --  any    any     anywhere             anywhere            
+   13   780 Service_HTTP  tcp  --  any    any     anywhere             anywhere             tcp dpt:www
+    0     0 Service_HTTPS  tcp  --  any    any     anywhere             anywhere             tcp dpt:https
+    0     0 Service_FTP  tcp  --  any    any     anywhere             anywhere             tcp dpt:ftp
+    0     0 Service_TELNET  tcp  --  any    any     anywhere             anywhere             tcp dpt:telnet
+    1    60 Service_SSH  tcp  --  any    any     anywhere             anywhere             tcp dpt:ssh
+    0     0 Service_PING  icmp --  any    any     anywhere             anywhere             icmp echo-request
+
+Chain INPUT_RIP (1 references)
+ pkts bytes target     prot opt in     out     source               destination         
+
+Chain INPUT_SP_DOMAIN (1 references)
+ pkts bytes target     prot opt in     out     source               destination         
+
+Chain INPUT_SRV (1 references)
+ pkts bytes target     prot opt in     out     source               destination         
+    0     0 ACCEPT     udp  --  br+    any     anywhere             anywhere             udp dpt:ntp
+    0     0 ACCEPT     udp  --  !br+   any     anywhere             anywhere             udp dpt:bootpc
+    2   648 ACCEPT     udp  --  br+    any     anywhere             anywhere             udp dpt:bootps
+
+Chain INPUT_TEST (1 references)
+ pkts bytes target     prot opt in     out     source               destination         
+
+Chain LevelLow (1 references)
+ pkts bytes target     prot opt in     out     source               destination         
+    1   140 ACCEPT     all  --  br+    any     anywhere             anywhere            
+    2    88 DROP       all  --  !br+   any     anywhere             anywhere            
+
+Chain NAT_LOOPBACK (0 references)
+ pkts bytes target     prot opt in     out     source               destination         
+
+Chain OUTPUT_GENERAL (1 references)
+ pkts bytes target     prot opt in     out     source               destination         
+   23  1649 ACCEPT     all  --  any    lo      anywhere             anywhere            
+    0     0 DROP       all  --  any    !lo     anywhere             127.0.0.0/8         
+
+Chain OUTPUT_SRV (1 references)
+ pkts bytes target     prot opt in     out     source               destination         
+
+Chain PING_DEATH (0 references)
+ pkts bytes target     prot opt in     out     source               destination         
+
+Chain PORT_SCAN (0 references)
+ pkts bytes target     prot opt in     out     source               destination         
+
+Chain PR_IPPASS_CWMP (0 references)
+ pkts bytes target     prot opt in     out     source               destination         
+    0     0 INPUT_CWMP  all  --  any    any     anywhere             anywhere            
+
+Chain PR_IPPASS_CWMP1 (1 references)
+ pkts bytes target     prot opt in     out     source               destination         
+
+Chain PR_IPPASS_GENERAL (0 references)
+ pkts bytes target     prot opt in     out     source               destination         
+
+Chain PR_IPPASS_GENERAL1 (1 references)
+ pkts bytes target     prot opt in     out     source               destination         
+    0     0 ACCEPT     udp  --  !wwan0 any     anywhere             anywhere             udp dpt:ntp
+    9  2880 ACCEPT     udp  --  !wwan0 any     anywhere             anywhere             udp dpt:bootps
+    0     0 ACCEPT     udp  --  wwan0  any     anywhere             anywhere             udp dpt:bootpc
+    0     0 DROP       tcp  --  wwan0  any     anywhere             anywhere             tcp dpt:domain
+    0     0 DROP       udp  --  wwan0  any     anywhere             anywhere             udp dpt:domain
+    8   464 ACCEPT     udp  --  lo     any     anywhere             anywhere             udp dpt:domain
+ 3534  277K ACCEPT     all  --  any    any     anywhere             anywhere             state RELATED,ESTABLISHED
+    0     0 ACCEPT     all  --  lo     any     anywhere             anywhere            
+    0     0 DROP       tcp  --  wwan0  any     anywhere             anywhere             tcp dpt:1900
+    0     0 DROP       udp  --  wwan0  any     anywhere             anywhere             udp dpt:1900
+    0     0 DROP       icmp --  eth+   any     anywhere             anywhere             icmp timestamp-request
+
+Chain PR_IPPASS_REMOMGMT (0 references)
+ pkts bytes target     prot opt in     out     source               destination         
+
+Chain PR_IPPASS_REMOMGMT1 (1 references)
+ pkts bytes target     prot opt in     out     source               destination         
+    0     0 ACCEPT     tcp  --  wwan0  any     anywhere             anywhere             tcp dpt:www
+    0     0 ACCEPT     tcp  --  eth+   any     anywhere             anywhere             tcp dpt:www
+    0     0 ACCEPT     tcp  --  wwan0  any     anywhere             anywhere             tcp dpt:https
+    0     0 ACCEPT     tcp  --  eth+   any     anywhere             anywhere             tcp dpt:https
+    0     0 DROP       tcp  --  wwan0  any     anywhere             anywhere             tcp dpt:ftp
+    0     0 DROP       tcp  --  eth+   any     anywhere             anywhere             tcp dpt:ftp
+    0     0 DROP       tcp  --  wwan0  any     anywhere             anywhere             tcp dpt:telnet
+    0     0 DROP       tcp  --  eth+   any     anywhere             anywhere             tcp dpt:telnet
+    0     0 ACCEPT     tcp  --  wwan0  any     anywhere             anywhere             tcp dpt:ssh
+    0     0 ACCEPT     tcp  --  eth+   any     anywhere             anywhere             tcp dpt:ssh
+    0     0 ACCEPT     icmp --  eth+   any     anywhere             anywhere            
+
+Chain SP_LAN_PART (0 references)
+ pkts bytes target     prot opt in     out     source               destination         
+    0     0 TRUST_DOMAIN  all  --  any    any     anywhere             anywhere            
+    0     0 DROP       all  --  any    any     anywhere             anywhere            
+
+Chain SP_TRUST_DOMAIN (0 references)
+ pkts bytes target     prot opt in     out     source               destination         
+
+Chain SYN_FLOODING (0 references)
+ pkts bytes target     prot opt in     out     source               destination         
+
+Chain Service_FTP (1 references)
+ pkts bytes target     prot opt in     out     source               destination         
+    0     0 DROP       all  --  any    any     anywhere             anywhere            
+
+Chain Service_HTTP (1 references)
+ pkts bytes target     prot opt in     out     source               destination         
+   13   780 ACCEPT     tcp  --  br+    any     anywhere             anywhere             tcp dpt:www
+    0     0 DROP       all  --  any    any     anywhere             anywhere            
+
+Chain Service_HTTPS (1 references)
+ pkts bytes target     prot opt in     out     source               destination         
+    0     0 ACCEPT     tcp  --  br+    any     anywhere             anywhere             tcp dpt:https
+    0     0 DROP       all  --  any    any     anywhere             anywhere            
+
+Chain Service_PING (1 references)
+ pkts bytes target     prot opt in     out     source               destination         
+    0     0 ACCEPT     icmp --  br+    any     anywhere             anywhere            
+    0     0 DROP       all  --  any    any     anywhere             anywhere            
+
+Chain Service_SSH (1 references)
+ pkts bytes target     prot opt in     out     source               destination         
+    1    60 ACCEPT     tcp  --  br+    any     anywhere             anywhere             tcp dpt:ssh
+    0     0 DROP       all  --  any    any     anywhere             anywhere            
+
+Chain Service_TELNET (1 references)
+ pkts bytes target     prot opt in     out     source               destination         
+    0     0 DROP       all  --  any    any     anywhere             anywhere            
+
+Chain TRUST_DOMAIN (2 references)
+ pkts bytes target     prot opt in     out     source               destination         
+
+Chain V4_PORT_REDIRECT (1 references)
+ pkts bytes target     prot opt in     out     source               destination
